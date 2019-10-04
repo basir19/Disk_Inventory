@@ -5,14 +5,14 @@
 USE master
 GO
 
-if DB_ID('MyMusicDB') is not null
-	DROP DATABASE MyMusicDB
+if DB_ID('disk_inventoryBQ') is not null
+	DROP DATABASE disk_inventoryBQ
 	GO
 
-CREATE DATABASE MyMusicDB;
+CREATE DATABASE disk_inventoryBQ;
 GO
 
-USE MyMusicDB;
+USE disk_inventoryBQ;
 
 --Genre, dist status and dist type Tables
 CREATE TABLE Genre(
@@ -79,14 +79,14 @@ CREATE TABLE Borrower_Disk(
 
 
 --create login user for disk table
-IF SUSER_ID('diskUser') is null
-	CREATE LOGIN diskUser WITH PASSWORD = 'Pa$$w0rd',
-	DEFAULT_DATABASE = MyMusicDB;
+IF SUSER_ID('diskUserBQ') is null
+	CREATE LOGIN diskUserBQ WITH PASSWORD = 'Pa$$w0rd',
+	DEFAULT_DATABASE = disk_inventoryBQ;
 
 --Create user 
-IF USER_ID('diskUser') is null
-	CREATE USER diskUser;
+IF USER_ID('diskUserBQ') is null
+	CREATE USER diskUserBQ;
 
 
-ALTER ROLE db_datareader ADD member diskUser;
+ALTER ROLE db_datareader ADD member diskUserBQ;
 GO
